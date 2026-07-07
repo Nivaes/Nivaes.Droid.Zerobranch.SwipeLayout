@@ -1,0 +1,83 @@
+name: Publish Release
+
+on:
+  release:
+    types:
+      - released
+
+jobs:
+  publish_release:
+    runs-on: windows-latest
+
+    steps:
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+
+    - name: release
+      if: github.event.action == 'released'
+      run: echo Release
+
+    - name: prereleased
+      if: github.event.action == 'prereleased'
+      run: echo Prereleased
+
+    - name: Checkout
+      uses: actions/checkout@v5
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v5
+      with:
+        global-json-file: ./global.json
+        source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+    - name: Install workload
+      run: |
+          dotnet workload install android ios maccatalyst tvos
+
+    - name: Release
+      run: |
+        echo "Tag: ${{ github.event.release.ref }}"
+
+    - name: Get Version
+      uses: nivaes/version-pack@v3
+      id: version_pack
+      with:
+        version: ${{ github.ref_name }}
+        
+    - name: Restore Dependencies
+      run: |
+          dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release -p:Version=${{ steps.version_pack.outputs.version-pack }} --no-restore
+
+    - name: Test
+      run: dotnet test --configuration Release --no-build --verbosity normal --no-restore --no-build
+
+    - name: Pack
+      run: dotnet pack --configuration Release --no-build --verbosity normal --output ./Artifacts/ -p:Version=${{ steps.version_pack.outputs.version-pack }} --no-restore
+
+    - name: Remove SourceGenerator symbols
+      shell: bash
+      run: |
+        rm -f ./Artifacts/*.SourceGenerator.*.snupkg
+
+    - name: Update release
+      uses: nivaes/update-release@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref_name }}
+        clean_assets: true
+        files: |
+          ./Artifacts/*.{nupkg,snupkg}
+
+    - name: Publish packages
+      shell: bash
+      run: |
+        shopt -s nullglob
+        dotnet nuget push ./Artifacts/*.nupkg --source nuget.org --skip-duplicate --api-key ${{ secrets.NIVAES_NUGET_TOKEN }}

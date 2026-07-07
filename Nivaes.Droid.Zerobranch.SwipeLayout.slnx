@@ -1,0 +1,23 @@
+<Solution>
+   <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="LICENSE" />
+    <File Path="NuGet.config" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Solution Items/.github/" />
+  <Folder Name="/Solution Items/.github/workflows/">
+    <File Path=".github/workflows/build_release.yaml" />
+    <File Path=".github/workflows/ci.yaml" />
+    <File Path=".github/workflows/delete-old-runs.yaml" />
+    <File Path=".github/workflows/publish_release.yaml" />
+  </Folder>
+  <Project Path="Nivaes.Droid.Zerobranch.SwipeLayout.Sample/Nivaes.Droid.Zerobranch.SwipeLayout.Sample.csproj"/>
+  <Project Path="Nivaes.Droid.Zerobranch.SwipeLayout/Nivaes.Droid.Zerobranch.SwipeLayout.csproj" />
+</Solution>

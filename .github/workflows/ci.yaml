@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    # branches-ignore:
+    # - 'release/**'
+    paths-ignore:
+    - '**/*.md'
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths-ignore:
+    - '**/*.md'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+
+    - name: Checkout
+      uses: actions/checkout@v5
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: ${{ env.net_core_version }}
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+    - name: Install workload
+      run: |
+          dotnet workload install android ios maccatalyst tvos
+
+    - name: Restore Dependencies
+      run: |
+          dotnet restore
+
+    - name: Build
+      run: |
+          dotnet build --configuration Release --no-restore
+
+    - name: Test
+      run: dotnet test --configuration Release --no-build --verbosity normal --no-restore --no-build

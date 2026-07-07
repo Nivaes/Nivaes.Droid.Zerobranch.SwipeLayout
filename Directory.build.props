@@ -1,35 +1,44 @@
 ﻿<Project>
   <PropertyGroup>
-    
-    <Copyright>Copyright (c) Nivaes Systems</Copyright>
+    <Copyright>Copyright (c) Nivaes Systems S.L.</Copyright>
+    <PackageProject>https://github.com/Nivaes/Nivaes.Droid.Zerobranch.SwipeLayout.Sample</PackageProject>
     <PackageLicenseExpression>MS-PL</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Nivaes/Xamarin.Droid.Zerobranch.Swipelayout</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
     <Authors>Nivaes Systems</Authors>
     <Company>Nivaes Systems</Company>
     <Owners>Nivaes</Owners>
     <PackageReleaseNotes>https://www.nivaes.com</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <RepositoryUrl>https://github.com/Nivaes/Xamarin.Droid.Ganfra.MaterialSpinner</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Nivaes/Nivaes.Droid.Zerobranch.SwipeLayout.Sample</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <NeutralLanguage>en</NeutralLanguage>
-    <Version>3.1.3.3</Version>
-
+    <VersionPrefix>0.0.0</VersionPrefix>
+    <VersionSuffix>-dev-0.0.1</VersionSuffix>
   </PropertyGroup>
 
   <PropertyGroup>
+    <_SupportedOSPlatformAndroidVersion>24</_SupportedOSPlatformAndroidVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <_AndroidTargetFrameworks>net10.0-android</_AndroidTargetFrameworks>
+    <_SampleAndroidTargetFramework>net10.0-android</_SampleAndroidTargetFramework>
+</PropertyGroup>
+
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);NU1507</NoWarn>
     <EnablePackageValidation>true</EnablePackageValidation>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
 
   <PropertyGroup>
-    
-    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
     <NoWarn>$(NoWarn);1591;1701;1702;1705;VSX1000</NoWarn>
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
-    <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' and '$(IsTestProject)' != 'true'">true</GeneratePackageOnBuild>
 
+    <DebugType>full</DebugType>
+    <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
   </PropertyGroup>
-  
+
 </Project>
