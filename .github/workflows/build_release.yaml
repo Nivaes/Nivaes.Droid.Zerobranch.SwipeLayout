@@ -38,7 +38,7 @@ jobs:
 
     - name: Install workload
       run: |
-          dotnet workload install android ios maccatalyst tvos
+          dotnet workload install android
   
     - name: Get Version
       uses: nivaes/version-pack@v3
