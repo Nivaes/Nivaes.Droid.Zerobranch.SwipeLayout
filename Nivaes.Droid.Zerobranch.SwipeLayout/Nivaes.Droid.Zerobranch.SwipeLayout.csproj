@@ -2,17 +2,26 @@
   
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFrameworks>net7.0-android;net8.0-android</TargetFrameworks>
+    <TargetFrameworks>$(_AndroidTargetFrameworks)</TargetFrameworks>
+    <SupportedOSPlatformVersion>$(_SupportedOSPlatformAndroidVersion)</SupportedOSPlatformVersion>
     
     <AssemblyName>Com.Zerobranch.SwipeLayout</AssemblyName>
     <RootNamespace>Com.Zerobranch.SwipeLayout</RootNamespace>
+    <IsTrimmable>true</IsTrimmable>
+    <IsAotCompatible>true</IsAotCompatible>
+    <RunAOTAnalysis>true</RunAOTAnalysis>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'!='Debug'">
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
   
   <PropertyGroup>
     <Description>Binding library of https://github.com/zerobranch/SwipeLayout</Description>
     <PackageId>Nivaes.Droid.Zerobranch.SwipeLayout</PackageId>
-    <PackageTags>xamarin;android;monodroid;zerobranch;swipelayout</PackageTags>
-    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
+    <PackageTags>xamarin;android;nivaes;zerobranch;swipelayout</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

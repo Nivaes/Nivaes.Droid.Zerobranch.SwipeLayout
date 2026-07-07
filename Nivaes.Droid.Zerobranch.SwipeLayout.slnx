@@ -18,6 +18,8 @@
     <File Path=".github/workflows/delete-old-runs.yaml" />
     <File Path=".github/workflows/publish_release.yaml" />
   </Folder>
-  <Project Path="Nivaes.Droid.Zerobranch.SwipeLayout.Sample/Nivaes.Droid.Zerobranch.SwipeLayout.Sample.csproj"/>
+  <Project Path="Nivaes.Droid.Zerobranch.SwipeLayout.Sample/Nivaes.Droid.Zerobranch.SwipeLayout.Sample.csproj">
+     <Deploy Solution="Debug|*" />
+  </Project>
   <Project Path="Nivaes.Droid.Zerobranch.SwipeLayout/Nivaes.Droid.Zerobranch.SwipeLayout.csproj" />
 </Solution>
