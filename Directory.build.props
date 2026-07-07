@@ -18,13 +18,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <_SupportedOSPlatformAndroidVersion>24</_SupportedOSPlatformAndroidVersion>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <_AndroidTargetFrameworks>net10.0-android</_AndroidTargetFrameworks>
     <_SampleAndroidTargetFramework>net10.0-android</_SampleAndroidTargetFramework>
-</PropertyGroup>
+
+    <_SupportedOSPlatformAndroidVersion>24</_SupportedOSPlatformAndroidVersion>
+  </PropertyGroup>
 
   <PropertyGroup>
     <NoWarn>$(NoWarn);NU1507</NoWarn>
